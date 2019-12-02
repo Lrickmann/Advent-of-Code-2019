@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def compute(arr, mode, first, second, target):
     if mode == 1:
         arr[target] = arr[first] + arr[second]
@@ -14,7 +15,7 @@ def compute(arr, mode, first, second, target):
         raise Exception("falscher mode")
 
 
-array_orig = np.loadtxt('input2', delimiter=",", dtype=int)
+array_orig = np.loadtxt('../inputs/input02', delimiter=",", dtype=int)
 
 done = False
 counter = 4

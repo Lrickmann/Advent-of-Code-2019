@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-class FuelCalculator:
+class FuelCalculator(object):
 
     def __init__(self, input_name):
         self.df = pd.read_csv(input_name, header=None)
@@ -11,7 +11,7 @@ class FuelCalculator:
         if weight is None:
             weight = (self.df // 3) - 2
             self.fuel = weight.sum()[0]
-            print(self.fuel)
+            print('You need ', self.fuel, ' fuel masses for all Modules.')
             return self.fuel
         ret = (weight // 3) - 2
         if ret < 0:
@@ -26,14 +26,15 @@ class FuelCalculator:
             while temp_fuel > 0:
                 temp_fuel = self.calc_fuel(temp_fuel)
                 self.fuel += temp_fuel
-        print(self.fuel)
+        print('You need ', self.fuel,
+              ' fuel masses for all Modules, when also taking into account the mass of the added fuel.')
 
     def print_fuel(self):
         print(self.fuel)
 
 
 if __name__ == '__main__':
-    calcfuel = FuelCalculator('input1')
+    calcfuel = FuelCalculator('../inputs/input01')
     print('Fuel after creation: ')
     calcfuel.print_fuel()
     print('Calculating Fuel: ')

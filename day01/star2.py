@@ -1,6 +1,6 @@
 import pandas as pd
 
-df = pd.read_csv("input1", header=None)
+df = pd.read_csv("../inputs/input01", header=None)
 fuel = 0
 
 

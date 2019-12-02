@@ -14,7 +14,7 @@ def compute(arr, mode, first, second, target):
         raise Exception("falscher mode")
 
 
-array = np.loadtxt('input2', delimiter=",",dtype=int)
+array = np.loadtxt('../inputs/input02', delimiter=",", dtype=int)
 array[1] = 12
 array[2] = 2
 
@@ -24,7 +24,6 @@ boolean = True
 i = 0
 
 while boolean:
-    print(i)
     array, boolean = compute(array, array[i], array[i+1], array[i+2], array[i+3])
     i += 4
 
