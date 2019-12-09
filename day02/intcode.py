@@ -58,7 +58,7 @@ class Intcode(object):
         string = f"{code:0{length}}"
         opcode = string[-2:]
         decoded = [opcode]
-        for i in range(2, length):
+        for i in range(3, length+1):
             decoded.append(int(string[-i]))
         return decoded
 

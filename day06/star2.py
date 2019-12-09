@@ -5,12 +5,9 @@ from anytree import Node, RenderTree
 import pandas as pd
 from queue import Queue
 
+test = ["COM)B", "B)C", "C)D", "D)E", "E)F", "B)G", "G)H", "D)I", "E)J", "J)K", "K)L", "K)YOU", "I)SAN"]
 
-planets = {}
-
-test = ["COM)B","B)C","C)D","D)E","E)F","B)G","G)H","D)I","E)J","J)K","K)L","K)YOU","I)SAN"]
-
-planets['COM'] = Node('COM')
+planets = {'COM': Node('COM')}
 
 for line in test:
     center, orbiting = line.split(")")
@@ -27,13 +24,10 @@ san = planets['SAN']
 you = planets['YOU']
 you_anc = planets['YOU'].ancestors
 
-
-liste = []
-for planet in san.ancestors:
+for planet in san.ancestors[::-1]:
     if planet in you_anc:
-        liste.append((san.depth-planet.depth)+(you.depth-planet.depth)-2)
-
-print(min(liste))
+        print((san.depth - planet.depth) + (you.depth - planet.depth) - 2)
+        break
 
 planets = {}
 count = 0
@@ -43,7 +37,6 @@ df = pd.read_csv("../inputs/input06", delimiter=")", header=None)
 df.columns = ['center', 'orbiting']
 temp = Queue()
 temp.put("COM")
-
 
 while not df.empty:
     orbits = df[df['center'] == temp.get()]
@@ -63,10 +56,7 @@ san = planets['SAN']
 you = planets['YOU']
 you_anc = planets['YOU'].ancestors
 
-
-liste = []
-for planet in san.ancestors:
+for planet in san.ancestors[::-1]:
     if planet in you_anc:
-        liste.append((san.depth-planet.depth)+(you.depth-planet.depth)-2)
-
-print(min(liste))
+        print((san.depth - planet.depth) + (you.depth - planet.depth) - 2)
+        break

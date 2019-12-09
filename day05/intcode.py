@@ -14,7 +14,7 @@ class Opcodes(Opc):
 
     def opcode04(self, arr, pointer, codes, **kwargs):
         values = self.get_values(arr, pointer, codes, length=2, target=1)
-        print(values[1])
+        print(arr[values[1]])
         pointer += 2
         return arr, pointer, True
 
@@ -36,7 +36,8 @@ if __name__ == '__main__':
         user_var = int(input())
         op = Opcodes()
         print("test01: ", op.opcode01([1101, 100, -1, 4, 0], 0, ['01', 1, 1, 0]))
-        print("test03: ", op.opcode03([3,0,4,0,99], 0, ['03', 1, 1, 0], user_input=1))
+        print("test03: ", op.opcode03([3, 0, 4, 0, 99], 0, ['03', 0, 0, 0], user_input=1))
+        print("test04: ", op.opcode04([3, 0, 4, 0, 99], 2, ['04', 0, 0, 0], user_input=1))
         op_codes = {'01': op.opcode01,
                     '02': op.opcode02,
                     '03': op.opcode03,
