@@ -43,13 +43,18 @@ def add_first_two_opcodes():
 class Intcode(object):
     """extandable compute function"""
 
-    def __init__(self, input_name, code_length=5, function_dict=None, **kwargs):
-        self.array_orig = np.loadtxt(input_name, delimiter=",", dtype=int)
+    def __init__(self, code_length=5, function_dict=None, **kwargs):
         if function_dict:
             self.functions = function_dict
         else:
             self.functions = add_first_two_opcodes()
         self.kwargs = kwargs
+
+    def load_input(self, input_name):
+        self.array_orig = np.loadtxt(input_name, delimiter=",", dtype='int64')
+
+    def load_array(self, array):
+        self.array_orig = np.array(array, dtype='int64')
 
     def get_array(self):
         return self.array_orig.copy()
@@ -103,6 +108,7 @@ if __name__ == '__main__':
     op_codes = {'01': op.opcode01,
                 '02': op.opcode02,
                 '99': op.opcode99}
-    test = Intcode('../inputs/input02', function_dict=op_codes)
+    test = Intcode(function_dict=op_codes)
+    test.load_input('../inputs/input02')
     test.print_first(12, 2)
     test.print_noun_and_verb(19690720)
