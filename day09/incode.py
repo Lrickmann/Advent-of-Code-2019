@@ -41,7 +41,7 @@ class Intcode(Intc):
         array = self.get_array()
         while boolean:
             try:
-                arr, pointer, boolean = self.compute(array, pointer)
+                array, pointer, boolean = self.compute(array, pointer)
             except IndexError:
                 array = np.concatenate((array, np.zeros(len(array), dtype='object')))
 
