@@ -14,10 +14,10 @@ class Opcodes(Opc):
             if i == 0:
                 continue
             elif i == target:
-                codes[i] = array[array[pointer + i] + self.base] if codes[i] == 2 else array[pointer + i]
+                codes[i] = array[pointer + i] + self.base if codes[i] == 2 else array[pointer + i]
             else:
                 codes[i] = array[array[pointer + i] + self.base] if codes[i] == 2 else array[pointer + i] if codes[
-                    i] else array[array[pointer + i]]
+                    i] == 1 else array[array[pointer + i]]
         return codes
 
     def opcode09(self, arr, pointer, codes, **kwargs):
