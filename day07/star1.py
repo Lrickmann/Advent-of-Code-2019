@@ -1,6 +1,5 @@
 from day05.intcode import Intcode, Opcodes
 
-
 if __name__ == '__main__':
     user_var = True
     op = Opcodes()

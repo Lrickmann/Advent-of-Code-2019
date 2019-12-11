@@ -43,12 +43,14 @@ def add_first_two_opcodes():
 class Intcode(object):
     """extandable compute function"""
 
-    def __init__(self, code_length=5, function_dict=None, **kwargs):
+    def __init__(self, function_dict=None, **kwargs):
+        self.array_orig = None
         if function_dict:
             self.functions = function_dict
         else:
             self.functions = add_first_two_opcodes()
         self.kwargs = kwargs
+        self.code_length = 5
 
     def load_input(self, input_name):
         self.array_orig = np.loadtxt(input_name, delimiter=",", dtype='int64')
@@ -68,12 +70,12 @@ class Intcode(object):
         return decoded
 
     def compute(self, array, pointer):
-        decoded = self.check_code(array[pointer], 5)
-        for key, function in self.functions.items():
-            if decoded[0] == key:
-                return function(array, pointer, decoded, **self.kwargs)
-        print(decoded[0])
-        raise Exception("wrong mode")
+        decoded = self.check_code(array[pointer], self.code_length)
+        if decoded[0] in self.functions:
+            return self.functions[decoded[0]](array, pointer, decoded, **self.kwargs)
+        else:
+            print(decoded[0])
+            raise Exception("wrong mode")
 
     def get_first(self, noun, verb):
         boolean = True
