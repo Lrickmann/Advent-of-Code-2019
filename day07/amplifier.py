@@ -32,17 +32,17 @@ class Intcode(Inc):
         return out
 
 
-class Amplifier(object):
+class Amplifier:
 
     def __init__(self, input_path, opcodes, phase):
         self.intcode = Intcode(function_dict=opcodes, phase=phase).load_input(input_path)
 
-    def get_output(self,amp_input):
+    def get_output(self, amp_input):
         self.intcode.kwargs['user_input'] = amp_input
         return self.intcode.get_amp_code()
 
 
-class AmplificationCircuit(object):
+class AmplificationCircuit:
 
     def __init__(self, number_amp, input_path, opcodes, phaselist):
         self.amplifier = [Amplifier(input_path, opcodes, phaselist[_]) for _ in range(number_amp)]
